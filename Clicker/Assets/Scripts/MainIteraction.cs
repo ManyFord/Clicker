@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainIteraction : MonoBehaviour
 {
     public GameObject NoClick,Clicked;
+    public Text pointsText;
     public int Points;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +19,7 @@ public class MainIteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        pointsText.text = "Pontos: " + Points;
     }
 
     public void OnClick()

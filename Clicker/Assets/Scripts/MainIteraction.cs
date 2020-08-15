@@ -24,6 +24,7 @@ public class MainIteraction : MonoBehaviour
 
     public void OnClick()
     {
+        GetComponent<AudioSource>().Play();
         Clicked.SetActive(true);
         NoClick.SetActive(false);
         Points++;

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class MainIteraction : MonoBehaviour
 {
-    public GameObject NoClick,Clicked;
-    public Text pointsText;
+    public GameObject NoClick, Clicked, Menu, CreateItem, itemParent, item, RankInstance;
+    public InputField Name;
+    public Text pointsText, RankName,RankPoints;
     public int Points;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class MainIteraction : MonoBehaviour
     void Update()
     {
         pointsText.text = "Pontos: " + Points;
+        RankPoints.text = pointsText.text;
     }
 
     public void OnClick()
@@ -44,8 +46,17 @@ public class MainIteraction : MonoBehaviour
 
     IEnumerator TimeClick()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.2f);
         Clicked.SetActive(false);
         NoClick.SetActive(true);
+    }
+
+    public void Scale()
+    {
+
+    }
+    public void LetsClick()
+    {
+        
     }
 }

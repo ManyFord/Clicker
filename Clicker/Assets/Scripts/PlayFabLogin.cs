@@ -29,6 +29,17 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
             LoginPanel.SetActive(false);
         }
+        else
+        {
+#if UNITY_ANDROID
+            var requestAndroid = new LoginWithAndroidDeviceIDRequest { AndroidDeviceId = ReturnMobileID(), CreateAccount = true };
+            PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginMobileSuccess, OnLoginMobileFailure);
+#endif
+#if UNITY_IOS
+            var requestIOS = new LoginWithIOSDeviceIDRequest { DeviceId = ReturnMobileID(), CreateAccount = true };
+            PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
+#endif
+        }
 
     }
 
@@ -41,48 +52,31 @@ public class PlayFabLogin : MonoBehaviour
         LoginPanel.SetActive(false);
         TextOut.text = "Lets Click";
     }
-    /*
-    void SetUserData()
+    private void OnLoginMobileSuccess(LoginResult result)
     {
-        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
-        {
-            Data = new Dictionary<string, string>() {
-            {MainIteraction.RankName,MainIteraction.RankPoints}
-        }
-        },
-        result => Debug.Log("Successfully updated user data"),
-        error => {
-            Debug.Log("Got error setting user data Ancestor to Arthur");
-            Debug.Log(error.GenerateErrorReport());
-        });
+        Debug.Log("Congratulations, you made your first successful API call!");
+        // PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName})
+        LoginPanel.SetActive(false);
+        TextOut.text = "Lets Click";
     }
-    */
-    void GetUserData(string myPlayFabeId)
+    
+    private void OnLoginFailure(PlayFabError error)
     {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest()
-        {
-            PlayFabId = myPlayFabeId,
-            Keys = null
-        }, result => {
-            Debug.Log("Got user data:");
-            if (result.Data == null || !result.Data.ContainsKey("Ancestor")) Debug.Log("No Ancestor");
-            else Debug.Log("Ancestor: " + result.Data["Ancestor"].Value);
-        }, (error) => {
-            Debug.Log("Got error retrieving user data:");
-            Debug.Log(error.GenerateErrorReport());
-        });
+        var registerRequest = new RegisterPlayFabUserRequest { Email = userEmail, Password = userPassword, Username = userName };
+        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSucess, OnRegisterFailure);
+        TextOut.text = "Verifique seus dados";
+    }
+
+    private void OnLoginMobileFailure(PlayFabError error)
+    {
+        Debug.Log(error.GenerateErrorReport());
+        TextOut.text = "Verifique seus dados";
     }
     private void OnRegisterSucess(RegisterPlayFabUserResult result)
     {
         PlayerPrefs.SetString("EMAIL", userEmail);
         PlayerPrefs.SetString("PASSWORD", userPassword);
         Debug.Log("CONGRATS");
-        TextOut.text = "Verifique seus dados";
-    }
-    private void OnLoginFailure(PlayFabError error)
-    {
-        var registerRequest = new RegisterPlayFabUserRequest { Email = userEmail, Password = userPassword, Username = userName };
-        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSucess, OnRegisterFailure);
         TextOut.text = "Verifique seus dados";
     }
     private void OnRegisterFailure(PlayFabError error)
@@ -110,29 +104,9 @@ public class PlayFabLogin : MonoBehaviour
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
         ResultPanel.SetActive(true);
     }
-
-    
-    #region Leaderboard
-    public void GetLeaderBoard()
+    public static String ReturnMobileID()
     {
-        var requestLeaderboard = new GetLeaderboardRequest { StatisticName = "Ranking", MaxResultsCount = 100000 };
-        //PlayFabClientAPI.GetLeaderboard(requestLeaderboard, OnGetLeadboard, OnErrorLeadBoard);
+        string deviceID = SystemInfo.deviceUniqueIdentifier;
+        return deviceID;
     }
-
-    void OnGetLeadboard(GetLeaderboardRequest result)
-    {
-        foreach (PlayerLeaderboardEntry player in result.Leaderboard)
-        {
-            Debug.Log(player.DisplayName + ": " + player.StatValue);
-        }
-
-
-    }
-
-    void OnErrorLeadBoard(PlayFabError error)
-    {
-        Debug.LogError(error.GenerateErrorReport());
-    }
-    #endregion
-    
 }

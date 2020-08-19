@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class MainIteraction : MonoBehaviour
 {
-    public GameObject NoClick, Clicked, Menu, CreateItem, itemParent, item, RankInstance;
-    public InputField Name;
-    public Text pointsText, RankName,RankPoints;
+    public GameObject NoClick, Clicked, Menu, CreateItem, itemParent, item, RankInstance,RegisterNamePanel;
+    public GameObject InputFieldName;
+    public Text pointsText, nameText;
+    public static string RankName, RankPoints;
     public int Points;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,8 @@ public class MainIteraction : MonoBehaviour
     void Update()
     {
         pointsText.text = "Pontos: " + Points;
-        RankPoints.text = pointsText.text;
+        RankPoints = pointsText.text;
+        nameText.text = RankName;
     }
 
     public void OnClick()
@@ -57,6 +59,11 @@ public class MainIteraction : MonoBehaviour
     }
     public void LetsClick()
     {
-        
+        RankName = InputFieldName.GetComponent<Text>().text;
+        if (RankName == "")
+        {
+            RegisterNamePanel.SetActive(true);
+        }
+        Debug.Log("Sucess" + RankName);
     }
 }

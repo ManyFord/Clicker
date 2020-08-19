@@ -2187,6 +2187,8 @@ namespace PlayFab.ClientModels
         /// The version of the leaderboard to get.
         /// </summary>
         public int? Version;
+
+        public IEnumerable<PlayerLeaderboardEntry> Leaderboard { get; set; }
     }
 
     /// <summary>

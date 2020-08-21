@@ -10,7 +10,7 @@ public class MainIteraction : MonoBehaviour
     public GameObject InputFieldName;
     public Text pointsText, nameText;
     public static string RankName, RankPoints;
-    public int Points;
+    public static int Points;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,7 @@ public class MainIteraction : MonoBehaviour
         pointsText.text = "Pontos: " + Points;
         RankPoints = pointsText.text;
         nameText.text = RankName;
+
     }
 
     public void OnClick()
@@ -33,6 +34,7 @@ public class MainIteraction : MonoBehaviour
         NoClick.SetActive(false);
         Points++;
         StartCoroutine("TimeClick");
+        PlayFabController.SetStats();
     }
 
     public void Animation()

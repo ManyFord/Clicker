@@ -21,9 +21,9 @@ public class MainIteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pointsText.text = "Pontos: " + Points;
-        RankPoints = pointsText.text;
-        nameText.text = RankName;
+        //pointsText.text = "Pontos: " + Points;
+        //RankPoints = pointsText.text;
+        //nameText.text = RankName;
 
     }
 

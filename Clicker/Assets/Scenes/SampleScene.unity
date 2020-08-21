@@ -577,6 +577,20 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6877784330173222580}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &238062997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238062993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce2b1ac3a3519b49b3ddcd4e5668c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNameText: {fileID: 273855491}
+  PlayerPointsText: {fileID: 1959017633}
 --- !u!1 &252649748
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,8 +635,8 @@ MonoBehaviour:
   RankInstance: {fileID: 0}
   RegisterNamePanel: {fileID: 980231606}
   InputFieldName: {fileID: 1802352311}
-  pointsText: {fileID: 1959017633}
-  nameText: {fileID: 273855491}
+  pointsText: {fileID: 0}
+  nameText: {fileID: 0}
 --- !u!114 &252649750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5084,6 +5098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RankInstance
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877784330404987685, guid: d5e371bae41a8e743bf65db17c4a8528,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6877784330404987686, guid: d5e371bae41a8e743bf65db17c4a8528,
         type: 3}

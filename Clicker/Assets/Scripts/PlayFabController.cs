@@ -178,13 +178,12 @@ error => { Debug.LogError(error.GenerateErrorReport()); });
         //Debug.Log(result.Leaderboard[0].StatValue);
         foreach(PlayerLeaderboardEntry player in result.Leaderboard)
         {
-            MainIteraction.RankName = player.DisplayName;
-            MainIteraction.Points = player.StatValue;
             Instantiate(ListingPrefab, listingContainer);
-            //GameObject tempListing = Instantiate(ListingPrefab, listingContainer);
-            //LeaderBoardListing list = tempListing.GetComponent<LeaderBoardListing>(); 
+            GameObject tempListing = Instantiate(ListingPrefab, listingContainer);
+            LeaderBoardListing LL = tempListing.GetComponent<LeaderBoardListing>();
+            LL.PlayerNameText.text = player.DisplayName;
+            LL.PlayerPointsText.text = player.StatValue.ToString();
             Debug.Log(player.DisplayName + " " + player.StatValue);
-
         }
     }
     void OnErrorLeaderboard(PlayFabError error)

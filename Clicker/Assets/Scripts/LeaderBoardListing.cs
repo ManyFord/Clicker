@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class LeaderBoardListing : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Text PlayerNameText;
+    public Text PlayerPointsText;
     void Start()
     {
         

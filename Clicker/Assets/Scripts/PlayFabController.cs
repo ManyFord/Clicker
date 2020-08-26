@@ -169,21 +169,32 @@ error => { Debug.LogError(error.GenerateErrorReport()); });
         var requestLeaderboard = new GetLeaderboardRequest { StatisticName = "Points", MaxResultsCount = 100 };
         PlayFabClientAPI.GetLeaderboard(requestLeaderboard, OnGetLeadboard, OnErrorLeaderboard);
     }
-
+    public GameObject LeaderboardPanel;
     public GameObject ListingPrefab;
     public Transform listingContainer;
+    public int rankPosition = 0;
 
     void OnGetLeadboard(GetLeaderboardResult result)
     {
         //Debug.Log(result.Leaderboard[0].StatValue);
         foreach(PlayerLeaderboardEntry player in result.Leaderboard)
         {
-            Instantiate(ListingPrefab, listingContainer);
+            rankPosition++;
             GameObject tempListing = Instantiate(ListingPrefab, listingContainer);
             LeaderBoardListing LL = tempListing.GetComponent<LeaderBoardListing>();
             LL.PlayerNameText.text = player.DisplayName;
             LL.PlayerPointsText.text = player.StatValue.ToString();
-            Debug.Log(player.DisplayName + " " + player.StatValue);
+            LL.RankPositionText.text = rankPosition.ToString();
+            Debug.Log(player.DisplayName + " " + player.StatValue + " " + rankPosition.ToString());                          
+        }
+    }
+
+    public void CloseLeaderboardPanel()
+    {
+        LeaderboardPanel.SetActive(false);
+        for (int i = listingContainer.childCount - 1; i >= 0; i--)
+        {
+            Destroy(listingContainer.GetChild(i).gameObject);
         }
     }
     void OnErrorLeaderboard(PlayFabError error)

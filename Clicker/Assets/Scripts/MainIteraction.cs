@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MainIteraction : MonoBehaviour
 {
-    public GameObject NoClick, Clicked, Menu, CreateItem, itemParent, item, RankInstance,RegisterNamePanel;
+    public GameObject NoClick, Clicked, Menu, CreateItem,RegisterNamePanel;
     public GameObject InputFieldName;
-    public Text pointsText, nameText;
+   // public static Text pointsText, nameText, RankPositionText;
     public static string RankName, RankPoints;
     public static int Points;
     // Start is called before the first frame update

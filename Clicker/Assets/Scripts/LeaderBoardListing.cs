@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class LeaderBoardListing : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Text PlayerNameText;
+    public Text RankPositionText;
     public Text PlayerPointsText;
+
+    // Start is called before the first frame update
     void Start()
     {
         
